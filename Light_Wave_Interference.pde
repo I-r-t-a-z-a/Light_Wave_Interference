@@ -7,20 +7,21 @@
   Questions
     How to set it up.
 */
+// 1 micrometer = 80 px
 import g4p_controls.*;
 int type = 1; //1: single slit
-int scaleFactorY = 50;
+//int scaleFactorY = 80;
 
 // "LEGIT" values. used in equations
 float y = 0; // To be calculated in setup. in micrometers
 final float L = 10; // in micrometers
-float wavelength = 380; // CHANGEABLE in nm.
+float wavelength = 400; // CHANGEABLE in nm.
 final float yBisector = 400; // TODO capitalize since constant?
 final float xBisector = 10; // USELESS
-int n = 15; // number of bright spots
+int n = 1; // DOUBT. Constructive Interference.
 
 // Scaled values
-float scaledY = y * scaleFactorY;
+//float scaledY = y * scaleFactorY;
 
 //Single Slits
 float w = 50; // width of slit in micrometers. 1 : 50. range: 1-3.
@@ -30,6 +31,7 @@ float d = 0; // CHANGEABLE
 
 
 void setup(){
+  shapeMode(CENTER);
   size(1200,800);
   background(0);
   y = (L * n * wavelength) / w;
@@ -62,18 +64,21 @@ void drawRays(){
   stroke(255);
   switch (type){
     case 1: // if single slit
-    int i = 0;
-    //while ( (i * y >= height) ){ // while the rays are pointing within the screen
-      line(xBisector, yBisector, 1000, n*y);
-      //line(xBisector, yBisector, 1000, (n/2)*y + yBisector);
+    while ( !(n * y >= height ) ){ // while the rays are pointing within the screen
+      //line(xBisector, yBisector, L * 100, (n/2)*y);
+      //line(xBisector, yBisector, L * 100, (n/2)*y + yBisector);
+      //scale(-1,-1);
+      //line(xBisector, yBisector, L * 100, (n/2)*y + yBisector);
+translate(width/2f,height/2f);
+
+line(0,0,150,150);
+//scale(-1,1);
+//line(0,0,150,150); // draw same line again, this time mirrored
       //println("n", n);
       //println("y", y);
       //println("n*y", n*y);
-      stroke(123, 100, 23);
-      line(xBisector, yBisector, 1000, yBisector);
-      stroke(255);
-      n--;
-    //}
+      n++;
+    }
     break;
     default:
   }
