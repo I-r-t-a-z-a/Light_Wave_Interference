@@ -5,7 +5,6 @@
     CHANGEABLE
     USELESS
   Questions
-    How to set it up.
 */
 // 1 micrometer = 80 px
 import g4p_controls.*;
@@ -20,7 +19,7 @@ final float yBisector = 400; // TODO capitalize since constant?
 final float xBisector = 10; // USELESS
 int n = 1; // DOUBT. Constructive Interference.
 
-// Scaled values
+//Scaled values
 //float scaledY = y * scaleFactorY;
 
 //Single Slits
@@ -45,7 +44,6 @@ void draw(){
 
 void drawSlits(){
   stroke(255);
-  //line(0, 0, 0, height);
   switch (type){
     case 1: // if single slit
       beginShape(LINES);
@@ -65,15 +63,8 @@ void drawRays(){
   switch (type){
     case 1: // if single slit
     while ( !(n * y >= height ) ){ // while the rays are pointing within the screen
-      //line(xBisector, yBisector, L * 100, (n/2)*y);
-      //line(xBisector, yBisector, L * 100, (n/2)*y + yBisector);
-      //scale(-1,-1);
-      //line(xBisector, yBisector, L * 100, (n/2)*y + yBisector);
-translate(width/2f,height/2f);
-
-line(0,0,150,150);
-//scale(-1,1);
-//line(0,0,150,150); // draw same line again, this time mirrored
+      line(xBisector, yBisector, L * 100, yBisector - (n/2)*y); // draws line above perpendicular bisector
+      line(xBisector, yBisector, L * 100, (n/2)*y + yBisector); // draws line below perpendicular bisector
       //println("n", n);
       //println("y", y);
       //println("n*y", n*y);
