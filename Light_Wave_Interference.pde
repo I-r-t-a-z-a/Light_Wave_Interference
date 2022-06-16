@@ -7,12 +7,18 @@
   Questions
   plan for drawing intensity graph
   draw dots at every pixel. see mandelbrot 
+  
+  GOAL
+  functional GUI (be able to accurately change the wavelength and slit width
 */
 // 1 micrometer = 80 px
 import g4p_controls.*;
 int type = 1; //1: single slit
 
+int numClicks = 0;
+
 int[] rgb = new int[3];
+boolean showHistoryLines = false;
 //int scaleFactorY = 80;
 
 // "LEGIT" values. used in equations
@@ -35,7 +41,6 @@ float d = 0; // CHANGEABLE
 
 void setup(){
   createGUI();
-  //shapeMode(CENTER);
   size(1200,800);
   background(0);
   noLoop(); // since it is more efficient to draw animation when it is changed instead of always doing so.
@@ -43,9 +48,10 @@ void setup(){
 
 void draw(){
   //wavelength = wavelengthSlider.getValueI();
-  println("y before" + y);
+  if (!showHistoryLines)
+    background(0);
+  n = 1;
   y = (L * n * wavelength) / w;
-  println("y after" + y);
   rgb = wavelengthToRGB(wavelength);
   drawSlits();
   drawRays();

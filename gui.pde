@@ -20,10 +20,28 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:userC
 
 public void wavelengthSliderChanged(GCustomSlider source, GEvent event) { //_CODE_:wavelengthSlider:289796:
   //println("wavelengthSlider - GCustomSlider >> GEvent." + event + " @ " + millis());
-  wavelength = wavelengthSlider.getValueI();
+  wavelength = wavelengthSlider.getValueI(); 
   redraw();
-  //println("wavelength:" + wavelength);
 } //_CODE_:wavelengthSlider:289796:
+
+public void historyLinesButtonClicked(GButton source, GEvent event) { //_CODE_:historyLinesButton:875434:
+  numClicks++;
+  if (numClicks % 2 == 0){
+    showHistoryLines = false;
+    historyLinesButton.setText("Show History Lines");
+    historyLinesButton.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  }
+  else{
+    showHistoryLines = true;
+    historyLinesButton.setText("Hide History Lines");
+    historyLinesButton.setLocalColorScheme(GCScheme.RED_SCHEME);
+  }
+  //println("historyLinesButton - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:historyLinesButton:875434:
+
+public void slitWidthSliderChanged(GCustomSlider source, GEvent event) { //_CODE_:slitWidthSlider:768820:
+  println("slitWidthSlider - GCustomSlider >> GEvent." + event + " @ " + millis());
+} //_CODE_:slitWidthSlider:768820:
 
 
 
@@ -51,6 +69,18 @@ public void createGUI(){
   wavelengthSlider.setNumberFormat(G4P.INTEGER, 0);
   wavelengthSlider.setOpaque(false);
   wavelengthSlider.addEventHandler(this, "wavelengthSliderChanged");
+  historyLinesButton = new GButton(userControlWindow, 169, 187, 119, 47);
+  historyLinesButton.setText("Show History Lines");
+  historyLinesButton.addEventHandler(this, "historyLinesButtonClicked");
+  slitWidthLabel = new GLabel(userControlWindow, 22, 103, 80, 20);
+  slitWidthLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  slitWidthLabel.setText("My label");
+  slitWidthLabel.setOpaque(false);
+  slitWidthSlider = new GCustomSlider(userControlWindow, 103, 88, 344, 52, "grey_blue");
+  slitWidthSlider.setLimits(0.5, 0.0, 1.0);
+  slitWidthSlider.setNumberFormat(G4P.DECIMAL, 2);
+  slitWidthSlider.setOpaque(false);
+  slitWidthSlider.addEventHandler(this, "slitWidthSliderChanged");
   userControlWindow.loop();
 }
 
@@ -59,3 +89,6 @@ public void createGUI(){
 GWindow userControlWindow;
 GLabel wavelengthLabel; 
 GCustomSlider wavelengthSlider; 
+GButton historyLinesButton; 
+GLabel slitWidthLabel; 
+GCustomSlider slitWidthSlider; 
