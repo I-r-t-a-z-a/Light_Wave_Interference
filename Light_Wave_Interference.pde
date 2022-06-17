@@ -5,13 +5,8 @@
     CHANGEABLE
     USELESS
   Questions
-  plan for drawing intensity graph
   draw dots at every pixel. see mandelbrot 
-  
-  GOAL
-  functional GUI (be able to accurately change the wavelength and slit width
 */
-// 1 micrometer = 80 px
 import g4p_controls.*;
 int type = 1; //1: single slit
 
@@ -19,7 +14,6 @@ int numClicks = 0;
 
 int[] rgb = new int[3];
 boolean showHistoryLines = false;
-//int scaleFactorY = 80;
 
 // "LEGIT" values. used in equations
 float y = 0; // To be calculated in setup. in micrometers
@@ -89,15 +83,10 @@ void drawRays(){
 }
 
 
-//----REWORK code below
 
 static private final double Gamma = 0.80;
 static private final double IntensityMax = 255;
 
-/**
- * Taken from Earl F. Glynn's web page:
- * <a href="http://www.efg2.com/Lab/ScienceAndEngineering/Spectra.htm">Spectra Lab Report</a>
- */
 public static int[] wavelengthToRGB(double Wavelength) {
     double factor;
     double Red, Green, Blue;
